@@ -43,54 +43,6 @@
         }
 
         /* Estilos da tabela */
-
-    /*oemça aqui*/
-    /* Definir uma largura mínima uniforme para todas as tabelas */
-table {
-    width: 100%;
-    min-width: 300px; /* Defina a largura mínima desejada */
-    border-collapse: collapse;
-}
-
-@media (max-width: 768px) {
-    table, thead, tbody, th, td, tr {
-        display: block;
-        width: 100%;
-    }
-
-    /* Esconder o cabeçalho da tabela em telas pequenas */
-    thead {
-        display: none;
-    }
-
-    /* Ajustar as linhas */
-    tr {
-        margin-bottom: 15px;
-        border: 1px solid #ddd;
-        padding: 10px;
-        border-radius: 5px;
-    }
-
-    /* Ajustar as células */
-    td {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px;
-        position: relative;
-    }
-
-    /* Exibir o label da coluna antes do valor */
-    td:before {
-        content: attr(data-label);
-        font-weight: bold;
-        width: 50%;
-        float: left;
-    }
-}
-/*termina aqui*/
-
-
-
         table {
             width: 100%;
             border-collapse: collapse;
