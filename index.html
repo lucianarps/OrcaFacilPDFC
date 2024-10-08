@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orçamento de Projeto Gráfico - Papel de Flor Conviteria</title>
+    <style>
+        /* Estilos gerais */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ebe8e8;
+            margin: 0;
+            padding: 20px;
+            padding-bottom: 70px;
+        }
+
+        h2, h3 {
+            color: #333;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+        }
+
+        .input-group label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .input-group input {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 100%;
+        }
+
+        /* Estilos da tabela */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        thead {
+            background-color: #c4bfb9;
+            color: #333;
+        }
+
+        thead th {
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #fff;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tbody td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        table input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            width: 25%;
+            word-wrap: break-word;
+        }
+
+        /* Estilo do botão de adicionar itens */
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #45A049;
+        }
+
+        /* Estilo do botão de WhatsApp */
+        #send-whatsapp {
+            background-color: #25d366;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            float: right;
+        }
+
+        #send-whatsapp:hover {
+            background-color: #20b857;
+        }
+
+        .input-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .input-row input[type="text"], .input-row input[type="number"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .summary {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .item-summary {
+            margin-top: 10px;
+            font-weight: normal;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Orçamento de Projeto Gráfico - Papel de Flor Conviteria</h2>
+        <form id="order-form">
+            <div class="input-group">
+                <label for="client-name">Nome do Cliente:</label>
+                <input type="text" id="client-name" name="client-name" required>
+            </div>
+            <div class="input-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label for="whatsapp">WhatsApp (com código de país):</label>
+                <input type="text" id="whatsapp" name="whatsapp" required>
+            </div>
+        </form>
+    </div>
+
+    <!-- Tabela de orçamento com subcategorias -->
+    <h3>Papelaria Pré-Wedding</h3>
+    <table id="budget-table-pre-wedding">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Valor Unit.</th>
+                <th>Quant.</th>
+                <th>Subtotal</th>
+                <th>Selecionar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Convite Tradicioal Brasil (Convite, individual e envelope)</td>
+                <td>R$250</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$250</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+            <tr>
+                <td>Cartões complementares (RSVP, Informações e outros) / Cada</td>
+                <td>R$50</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$50</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+            <tr>
+                <td>Logo / Brasão / Monograma (avulso)</td>
+                <td>R$200</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$200</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+            <tr>
+                <td>Tags Nome do Convidado</td>
+                <td>R$100</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$100</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+            <tr>
+                <td>Convite Digital / Save the Date -  Interativo (Links para Local, site e RSVP)</td>
+                <td>R$100</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$100</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+            <tr>
+                <td>Convite / Save the Date - Digital Animado</td>
+                <td>R$150</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$150</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+            <tr>
+                <td>Save the Date (Simples)</td>
+                <td>R$100</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$100</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+            <tr>
+                <td>Site dos noivos (Completo,com identdade visual, presente e outros)</td>
+                <td>R$2.500,00</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$2.500,00</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Convites Especiais</h3>
+    <table id="budget-table-special-invites">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Valor Unit.</th>
+                <th>Quant.</th>
+                <th>Subtotal</th>
+                <th>Selecionar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Manual de Padrinhos (Casal)</td>
+                <td>R$150</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$150</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+            <tr>
+                <td>Manual Adicional (Feminino ou Masculino / Cada)</td>
+                <td>R$75</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$75</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+            <tr>
+                <td>Manual digital (Casal)</td>
+                <td>R$280</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$280</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+            <tr>
+                <td>Manual digital Adiconal (Cada)</td>
+                <td>R$100</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$280</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+            <tr>
+                <td>Convite Padrinhos</td>
+                <td>R$50</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$50</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+            <tr>
+                <td>Convite Madrinhas</td>
+                <td>R$50</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$50</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+            <tr>
+                <td>Convite Casal</td>
+                <td>R$50</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$50</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+            <tr>
+                <td>Convites adicionais (Pajem, Dama, Pastor, Avós, Pais) / Cada</td>
+                <td>R$50</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$50</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+            <tr>
+                <td>Caixa de Padrinhos Solteiro</td>
+                <td>R$50</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$50</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+            <tr>
+                <td>Caixa de Padrinhos Casal</td>
+                <td>R$50</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$50</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Papelaria do Dia</h3>
+    <table id="budget-table-day">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Valor Unit.</th>
+                <th>Quant.</th>
+                <th>Subtotal</th>
+                <th>Selecionar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Par de  Votos</td>
+                <td>R$100</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$100</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+            <tr>
+                <td>Cone para Pétalas / Doces (Cada)</td>
+                <td>R$50</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$50</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+            <tr>
+                <td>Programa de Cerimônia</td>
+                <td>R$100</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$100</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+            <tr>
+                <td>Lágrimas de Alegria (Simples)</td>
+                <td>R$30</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$30</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr> 
+            <tr>
+                <td>Lágrimas de Alegria (Envelope)</td>
+                <td>R$50</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$50</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr> 
+            <tr>
+                <td>Ventarola</td>
+                <td>R$50</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$50</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr> 
+            <tr>
+                <td>Placa de Boas Vindas</td>
+                <td>R$80</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$80</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr> 
+            <tr>
+                <td>Placas de Sinalização (Banheiros, Estação de repelente, Outros)</td>
+                <td>R$50</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$50</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr> 
+            <tr>
+                <td>Menu</td>
+                <td>R$100</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$100</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr> 
+            <tr>
+                <td>Menu Bar</td>
+                <td>R$70</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$70</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr> 
+            <tr>
+                <td>Pista de Dança</td>
+                <td>R$100</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$100</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr> 
+            <tr>
+                <td>Chinelo</td>
+                <td>R$100</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$100</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr> 
+            <tr>
+                <td>Vale Conforto</td>
+                <td>R$30</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$30</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+            <tr>
+                <td>KIt Operação Lua de Mel</td>
+                <td>R$100</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$100</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr> 
+                <tr>
+                    <td>Tag Lembrança</td>
+                    <td>R$30</td>
+                    <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                    <td class="subtotal">R$30</td>
+                    <td><input type="checkbox" class="item-checkbox"></td>
+                </tr>  
+                <tr>
+                    <td>Sacola de Doces</td>
+                    <td>R$50</td>
+                    <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                    <td class="subtotal">R$50</td>
+                    <td><input type="checkbox" class="item-checkbox"></td>
+                </tr> 
+                <tr>
+                    <td>Kit Toalete</td>
+                    <td>R$380</td>
+                    <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                    <td class="subtotal">R$380</td>
+                    <td><input type="checkbox" class="item-checkbox"></td>
+                </tr>
+                <tr>
+                    <td>Livro de Colorir para Crianças</td>
+                    <td>R$100</td>
+                    <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                    <td class="subtotal">R$100</td>
+                    <td><input type="checkbox" class="item-checkbox"></td>
+                </tr>
+        </tbody>
+    </table>
+
+    <h3>Papelaria Destination Wedding</h3>
+    <table id="budget-table-destination-wedding">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Valor Unit.</th>
+                <th>Quant.</th>
+                <th>Subtotal</th>
+                <th>Selecionar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Cartão de Boas-Vindas</td>
+                <td>R$50</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$50</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+            <tr>
+                <td>Tag lembrancinha</td>
+                <td>R$30</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$30</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+            <tr>
+                <td>Rótulo</td>
+                <td>R$30</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$30</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+            <tr>
+                <td>Aviso para Porta (Arte e arquivo de corte)</td>
+                <td>R$100</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$100</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+            <tr>
+                <td>Cartão de Informações Locais </td>
+                <td>R$100</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$100</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+            <tr>
+                <td>Cartão de Agradecimento</td>
+                <td>R$50</td>
+                <td><input type="number" class="quantity" value="1" min="1" onchange="updateSubtotal(this)"></td>
+                <td class="subtotal">R$50</td>
+                <td><input type="checkbox" class="item-checkbox"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Novos Itens</h3>
+    <table id="new-items-table">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Valor Unit.</th>
+                <th>Quant.</th>
+                <th>Subtotal</th>
+                <th>Selecionar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Itens adicionados pelo usuário -->
+        </tbody>
+    </table>
+
+    <!-- Campo para adicionar novos itens -->
+    <div class="input-row">
+        <input type="text" id="new-item" placeholder="Descrição do item" style="width: 50%;">
+        <input type="number" id="new-price" placeholder="Valor Unitário" style="width: 20%;" min="1">
+        <input type="number" id="new-quantity" placeholder="Quantidade" style="width: 20%;" min="1" onchange="calculateSubtotal()">
+        <input type="text" id="new-subtotal" placeholder="Subtotal" style="width: 20%;" readonly>
+        <button type="button" onclick="addItem()">Adicionar</button>
+    </div>
+
+    <!-- Exibição da contagem de itens, total e resumo de itens -->
+    <div class="summary">
+        <p id="item-count">Total de itens selecionados: 0</p>
+        <p id="total-amount">Valor total: R$0</p>
+        <h3>Resumo dos Itens Selecionados</h3>
+        <ul id="item-summary" class="item-summary"></ul>
+    </div>
+
+    <!-- Botão de envio via WhatsApp -->
+    <button id="send-whatsapp" onclick="sendWhatsApp()">Enviar Orçamento para WhatsApp</button>
+
+    <script>
+        // Função para calcular o subtotal automaticamente
+        function calculateSubtotal() {
+            const price = parseFloat(document.getElementById('new-price').value);
+            const quantity = parseInt(document.getElementById('new-quantity').value);
+
+            if (!isNaN(price) && !isNaN(quantity)) {
+                const subtotal = price * quantity;
+                document.getElementById('new-subtotal').value = `R$${subtotal.toFixed(2)}`;
+            } else {
+                document.getElementById('new-subtotal').value = '';
+            }
+        }
+
+        // Função para adicionar novos itens à tabela de Novos Itens
+        function addItem() {
+            const newItemDesc = document.getElementById('new-item').value;
+            const newItemPrice = parseFloat(document.getElementById('new-price').value);
+            const newItemQuantity = parseInt(document.getElementById('new-quantity').value);
+
+            if (newItemDesc && newItemPrice && newItemQuantity) {
+                const table = document.getElementById('new-items-table').querySelector('tbody');
+                const newRow = table.insertRow();
+
+                const cell1 = newRow.insertCell(0);
+                const cell2 = newRow.insertCell(1);
+                const cell3 = newRow.insertCell(2);
+                const cell4 = newRow.insertCell(3);
+                const cell5 = newRow.insertCell(4);
+
+                cell1.innerHTML = newItemDesc;
+                cell2.innerHTML = `R$${newItemPrice}`;
+                cell3.innerHTML = `<input type="number" value="${newItemQuantity}" min="1" onchange="updateSubtotal(this)">`;
+                const subtotal = newItemPrice * newItemQuantity;
+                cell4.innerHTML = `R$${subtotal.toFixed(2)}`;
+                cell5.innerHTML = '<input type="checkbox" class="item-checkbox">';
+
+                // Limpar os campos de entrada
+                document.getElementById('new-item').value = '';
+                document.getElementById('new-price').value = '';
+                document.getElementById('new-quantity').value = '';
+                document.getElementById('new-subtotal').value = '';
+
+                updateSummary(); // Atualiza a contagem de itens e total
+            } else {
+                alert('Por favor, preencha todos os campos para adicionar um novo item.');
+            }
+        }
+
+        // Função para atualizar o subtotal ao alterar a quantidade
+        function updateSubtotal(element) {
+            const row = element.closest('tr');
+            const unitPriceText = row.querySelector('td:nth-child(2)').innerText;
+            const unitPrice = parseFloat(unitPriceText.replace('R$', ''));
+            const quantity = parseInt(element.value);
+            const subtotal = unitPrice * quantity;
+
+            row.querySelector('.subtotal').innerText = `R$${subtotal.toFixed(2)}`;
+            updateSummary();
+        }
+
+// Função para envio de orçamento via WhatsApp
+function sendWhatsApp() {
+    const clientName = document.getElementById("client-name").value;
+    const email = document.getElementById("email").value;
+    const clientWhatsApp = document.getElementById("whatsapp").value; // Número inputado no campo de informações pessoais
+
+    let selectedItems = [];
+    let totalValue = 0;
+
+    // Coletar os itens selecionados e calcular o total
+    document.querySelectorAll('table tbody tr').forEach(row => {
+        const checkbox = row.querySelector('.item-checkbox');
+        if (checkbox && checkbox.checked) {
+            const description = row.cells[0].innerText;
+            const unitPrice = parseFloat(row.cells[1].innerText.replace('R$', ''));
+            const quantity = parseInt(row.querySelector('input[type="number"]').value);
+            const subtotal = unitPrice * quantity;
+            selectedItems.push(`${description}: R$${unitPrice} x ${quantity} = R$${subtotal}`);
+            totalValue += subtotal;
+        }
+    });
+
+    if (selectedItems.length === 0) {
+        alert('Selecione pelo menos um item.');
+        return;
+    }
+
+    // Construir a mensagem
+    let message = `Orçamento de Projeto Gráfico - Papel de Flor Conviteria\n`;
+    message += `Cliente: ${clientName}\n`;
+    message += `Email: ${email}\n`;
+    message += `Itens:\n${selectedItems.join('\n')}\n`;
+    message += `Total: R$${totalValue.toFixed(2)}`;
+
+    // Codificar a mensagem para garantir que caracteres especiais sejam enviados corretamente
+    const encodedMessage = encodeURIComponent(message);
+
+    // Formatar o número de WhatsApp
+    const formattedWhatsApp = clientWhatsApp.replace(/\D/g, ''); // Remove qualquer caractere que não seja número
+
+    // Verifica se o número foi fornecido
+    if (formattedWhatsApp.length === 0) {
+        alert("Por favor, insira um número de WhatsApp válido.");
+        return;
+    }
+
+    // Gerar URL do WhatsApp com o número inputado pelo usuário
+    const whatsappURL = `https://wa.me/${formattedWhatsApp}?text=${encodedMessage}`;
+
+    // Abrir a URL do WhatsApp
+    window.open(whatsappURL, '_blank');
+}
+
+        // Função para atualizar a contagem de itens, o valor total e o resumo de itens selecionados
+        function updateSummary() {
+            let itemCount = 0;
+            let totalValue = 0;
+            let selectedItemsList = [];
+
+            document.querySelectorAll('table tbody tr').forEach(row => {
+                const checkbox = row.querySelector('.item-checkbox');
+                if (checkbox && checkbox.checked) {
+                    const description = row.cells[0].innerText;
+                    const unitPrice = parseFloat(row.cells[1].innerText.replace('R$', ''));
+                    const quantity = parseInt(row.querySelector('input[type="number"]').value);
+                    const subtotal = unitPrice * quantity;
+                    totalValue += subtotal;
+                    itemCount += quantity;
+                    selectedItemsList.push(`${description}: R$${unitPrice} x ${quantity} = R$${subtotal}`);
+                }
+            });
+
+            document.getElementById('item-count').innerText = `Total de itens selecionados: ${itemCount}`;
+            document.getElementById('total-amount').innerText = `Valor total: R$${totalValue}`;
+
+            // Atualiza o resumo dos itens selecionados
+            const summaryElement = document.getElementById('item-summary');
+            summaryElement.innerHTML = ''; // Limpa o resumo atual
+            selectedItemsList.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.textContent = item;
+                summaryElement.appendChild(listItem);
+            });
+        }
+
+        document.addEventListener('change', function() {
+            updateSummary();
+        });
+    </script>
+</body>
+</html>
