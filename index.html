@@ -89,6 +89,27 @@
             word-wrap: break-word;
         }
 
+        /* Estilos para garantir que as tabelas tenham a mesma largura em telas pequenas */
+        @media (max-width: 600px) {
+            table {
+                width: 100%; /* Garante que todas as tabelas ocupem 100% da largura */
+                table-layout: fixed; /* Força a largura das colunas a ser igual */
+            }
+            
+            thead th, tbody td {
+                font-size: 14px; /* Diminui o tamanho da fonte para melhor visualização */
+                padding: 8px; /* Ajusta o espaçamento interno */
+            }
+            
+            tbody td input[type="number"] {
+                width: 50px; /* Ajusta a largura dos campos de número */
+            }
+
+            .input-row input[type="text"], .input-row input[type="number"] {
+                width: 100%; /* Faz com que os campos de texto ocupem 100% da largura */
+            }
+        }
+
         /* Estilo do botão de adicionar itens */
         button {
             background-color: #4CAF50;
@@ -165,7 +186,7 @@
         </form>
     </div>
 
-    <!-- Tabela de orçamento com subcategorias -->
+    <!-- Exemplo de tabela ajustada -->
     <h3>Papelaria Pré-Wedding</h3>
     <table id="budget-table-pre-wedding">
         <thead>
@@ -542,8 +563,13 @@
         <input type="number" id="new-price" placeholder="Valor Unitário" style="width: 20%;" min="1">
         <input type="number" id="new-quantity" placeholder="Quantidade" style="width: 20%;" min="1" onchange="calculateSubtotal()">
         <input type="text" id="new-subtotal" placeholder="Subtotal" style="width: 20%;" readonly>
+    </div>
+    
+    <!-- Botão Adicionar posicionado abaixo, à direita -->
+    <div style="text-align: right; margin-top: 10px;">
         <button type="button" onclick="addItem()">Adicionar</button>
     </div>
+    
 
     <!-- Exibição da contagem de itens, total e resumo de itens -->
     <div class="summary">
@@ -708,3 +734,4 @@ function sendWhatsApp() {
     </script>
 </body>
 </html>
+
